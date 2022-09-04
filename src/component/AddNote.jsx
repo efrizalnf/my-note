@@ -44,9 +44,9 @@ function AddNote() {
             const notes = JSON.parse(localStorage.getItem('NOTES')) || [];
             notes.push(datas)
             await Data.addNotes(JSON.stringify(notes));
-            
 
-            
+
+
         } catch (err) {
             Swal.fire({
                 icon: 'error',
@@ -60,12 +60,14 @@ function AddNote() {
 
     return (
         <>
-            <h1>My Note - My Adventure</h1>
-            <form action="post" onSubmit={handleSubmit}>
-                <input type="text" className="title-input" value={title} onChange={(e) => setTitle(e.target.value)} required /><br />
-                <textarea type="text" className="desc-input" rows="10" value={desc} onChange={(e) => setDesc(e.target.value)} required /><br />
-                <button className="submit-note" type="submit">Add Note</button>
-            </form>
+            <div className="fr-add">
+                <h1>My Note - My Adventure</h1>
+                <form action="post" onSubmit={handleSubmit}>
+                    <input placeholder="Please input title of note" type="text" className="title-input" value={title} onChange={(e) => setTitle(e.target.value)} required /><br />
+                    <textarea placeholder="Please input Description of note" type="text" className="desc-input" rows="10" value={desc} onChange={(e) => setDesc(e.target.value)} required /><br />
+                    <button className="submit-note" type="submit">Add Note</button>
+                </form>
+            </div>
         </>
     );
 }

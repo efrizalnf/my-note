@@ -12,9 +12,9 @@ function NoteItem({ id,judul, desk }) {
     }
     return (
         <div className="note-item">
-            <h3 className="note-title">{judul}</h3>
-            <p className="note-desc">{desk}</p>
-            <button onClick={() => deleteNote(id)}>X</button>
+            <h3 className="note-title">Title : {judul}</h3>
+            <p className="note-desc">Desc : {desk}</p>
+            <button onClick={() => deleteNote(id)}>Delete X</button>
         </div>
     );
 
