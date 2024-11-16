@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 
 function AddNote({ addNewNote, closeModal }) {
-    // const [title, setTitle] = useState('');
-    // const [body, setBody] = useState('');
     const [formData, setFormData] = useState({
         title: '',
         noteBody: '',
