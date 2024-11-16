@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Data from "../data/Data";
 import { showFormattedDate } from '../utils/data';
 function NoteItem({ note }) {
 

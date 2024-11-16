@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Data from "../data/Data";
 import Swal from "sweetalert2";
 
 function AddNote() {
@@ -39,9 +38,6 @@ function AddNote() {
                 title: title,
                 desc: desc
             }
-            const notes = JSON.parse(localStorage.getItem('NOTES')) || [];
-            notes.push(datas)
-            await Data.addNotes(JSON.stringify(notes));
         } catch (err) {
             Swal.fire({
                 icon: 'error',
