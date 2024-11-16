@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import "./Home.css";
+import './style/index.css';
+import "./style/Home.css";
 import reportWebVitals from './reportWebVitals';
 import Home from './page/Home';
 import 'bulma/css/bulma.min.css';

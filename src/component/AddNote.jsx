@@ -43,7 +43,6 @@ function AddNote({ addNewNote, closeModal }) {
             },
             willClose: () => {
                 inputNote();
-                // window.location.reload();
                 clearInterval(timerInterval)
             }
         }).then((result) => {
@@ -86,7 +85,7 @@ function AddNote({ addNewNote, closeModal }) {
                 <form action="post" onSubmit={handleSubmit}>
                     <input name="title" placeholder="Please input title of note" type="text" className="input mb-2 title-input" value={formData.title} onChange={onTitleChange} required /><br />
                     <textarea name="noteBody" placeholder="Please input Description of note" type="text" className="textarea desc-input" rows="10" value={formData.noteBody} onChange={onBodyChange} required /><br />
-                    <button className="button is-primary submit-note" type="submit" onClick={handleSubmit}>Add Note</button>
+                    <button className="button is-primary submit-note" type="submit">Add Note</button>
                 </form>
             </div>
         </>

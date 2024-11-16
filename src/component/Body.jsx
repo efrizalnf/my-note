@@ -46,7 +46,6 @@ const Body = ({ notes, addNewNote, onDelete, onArchive }) => {
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 style={customStyles}
-                contentLabel="Example Modal"
                 closeTimeoutMS={200}
             >
                 <AddNote addNewNote={addNewNote} closeModal={closeModal} />
