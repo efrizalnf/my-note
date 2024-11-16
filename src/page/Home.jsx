@@ -1,11 +1,10 @@
 // import './App.css';
 import React from "react";
 import Header from "../component/Header";
-import NoteList from '../component/NoteLists'
-import "../Home.css";
+
 import { getInitialData } from '../utils/data';
 import autoBind from 'react-autobind';
-import AddNote from "../component/AddNote";
+import AppBody from "../component/Body";
 
 class Home extends React.Component {
   constructor(props) {
@@ -27,12 +26,31 @@ class Home extends React.Component {
       })
     }
   }
+  addNewNoteHandler(newNoteData) {
+    try {
+      this.setState((prevState) => {
+        return {
+          notes: [newNoteData, ...prevState.notes,],
+          allnotes: [newNoteData, ...prevState.allnotes,]
+        }
+      })
+      return {
+        error: false,
+        message: 'Success!'
+      }
+    }
+    catch (error) {
+      return {
+        error: true,
+        message: 'Failed!'
+      }
+    }
+  }
   render() {
     return (
     <>
-      <AddNote />
         <Header onSearch={this.onSearchHandler} />
-        <NoteList notes={this.state.notes}   />
+        <AppBody notes={this.state.notes} addNewNote={this.addNewNoteHandler}  />
     </>
     );
   }

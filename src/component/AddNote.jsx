@@ -1,14 +1,36 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 
-function AddNote() {
-    const [title, setTitle] = useState('');
-    const [desc, setDesc] = useState('');
+function AddNote({ addNewNote, closeModal }) {
+    // const [title, setTitle] = useState('');
+    // const [body, setBody] = useState('');
+    const [formData, setFormData] = useState({
+        title: '',
+        noteBody: '',
+    });
+
+    const onTitleChange = (event) => {
+        event.preventDefault();
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value
+        })
+    }
+
+    const onBodyChange = (event) => {
+        event.preventDefault();
+        if (event.target.value.length <= 50) {
+            setFormData({
+                ...formData,
+                [event.target.name]: event.target.value,
+            })
+        }
+    }
 
     const handleSubmit = (e) => {
         let timerInterval
         Swal.fire({
-            title: 'Save note',
+            title: 'Saving note',
             html: 'Proses simpan dalam <b></b> detik.',
             timer: 1000,
             timerProgressBar: true,
@@ -21,7 +43,7 @@ function AddNote() {
             },
             willClose: () => {
                 inputNote();
-                window.location.reload();
+                // window.location.reload();
                 clearInterval(timerInterval)
             }
         }).then((result) => {
@@ -33,11 +55,20 @@ function AddNote() {
 
     const inputNote = async (data) => {
         try {
-            const datas = {
+            const data = {
                 id: +new Date(),
-                title: title,
-                desc: desc
+                title: formData.title,
+                body: formData.noteBody,
+                archived: false,
+                createdAt: new Date(),
             }
+            addNewNote(data);
+            setFormData({
+                ...formData,
+                title: '',
+                noteBody: '',
+            })
+            closeModal();
         } catch (err) {
             Swal.fire({
                 icon: 'error',
@@ -52,11 +83,10 @@ function AddNote() {
     return (
         <>
             <div className="fr-add">
-                <h1>My Note - My Adventure</h1>
                 <form action="post" onSubmit={handleSubmit}>
-                    <input placeholder="Please input title of note" type="text" className="title-input" value={title} onChange={(e) => setTitle(e.target.value)} required /><br />
-                    <textarea placeholder="Please input Description of note" type="text" className="desc-input" rows="10" value={desc} onChange={(e) => setDesc(e.target.value)} required /><br />
-                    <button  className="button is-primary submit-note" type="submit">Add Note</button>
+                    <input name="title" placeholder="Please input title of note" type="text" className="input mb-2 title-input" value={formData.title} onChange={onTitleChange} required /><br />
+                    <textarea name="noteBody" placeholder="Please input Description of note" type="text" className="textarea desc-input" rows="10" value={formData.noteBody} onChange={onBodyChange} required /><br />
+                    <button className="button is-primary submit-note" type="submit" onClick={handleSubmit}>Add Note</button>
                 </form>
             </div>
         </>
