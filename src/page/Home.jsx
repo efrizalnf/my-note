@@ -10,21 +10,16 @@ class Home extends React.Component {
     super(props);
     this.state = {
       notes: getInitialData(),
-      unarchieved: getInitialData()
+      unarchieved: getInitialData(),
+      queryFilter: '',
     }
     autoBind(this);
   }
 
-  onSearchHandler(text) {
-    if (text.length !== 0 && text.trim() !== '') {
-      this.setState({
-        notes: this.state.unarchieved.filter(note => note.title.toLowerCase().includes(text.toLowerCase())),
-      })
-    } else {
-      this.setState({
-        notes: this.state.notes,
-      })
-    }
+  onSearchHandler(valueInput) {
+    this.setState({
+      queryFilter: valueInput,
+    });
   }
 
   addNewNoteHandler(newNoteData) {
@@ -93,10 +88,13 @@ class Home extends React.Component {
   }
 
   render() {
+    const filteredNotes = this.state.notes.filter((notes) =>
+      notes.title.toLowerCase().includes(this.state.queryFilter.toLowerCase())
+    )
     return (
     <>
         <Header onSearch={this.onSearchHandler} />
-        <AppBody notes={this.state.notes} addNewNote={this.addNewNoteHandler} onArchive={this.onArchiveHandler} onDelete={this.onDeleteHandler} />
+        <AppBody notes={filteredNotes} addNewNote={this.addNewNoteHandler} onArchive={this.onArchiveHandler} onDelete={this.onDeleteHandler} />
         <Footer/>
     </>
     );

@@ -9,7 +9,8 @@ function NoteItem({ note, onArchive, onDelete }) {
             <p className="note-body has-text-primary mb-2">{note.body}</p>
             <p className="createdAt mb-2">writed at : {showFormattedDate(note.createdAt)}</p>
             <div className="has-text-right">
-                {note.archieve === false ? <button className="button is-primary note-archieved" onClick={onArchiveActive}>❤️</button> : <button className="button is-warning note-archieved " onClick={onArchiveActive}>🤍</button>
+            
+                {note.archived === true ? <button className="button is-primary note-archieved" onClick={onArchiveActive}>❤️</button> : <button className="button is-warning note-archieved " onClick={onArchiveActive}>🤍</button>
                 }
                 <button className="button is-danger note-delete ml-2" onClick={onDeleteActive}>🗑️</button>
             </div>
